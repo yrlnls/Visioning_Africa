@@ -1,13 +1,32 @@
 import React from "react";
-import { ArrowRight, Globe, BarChart, Code } from "lucide-react";
+import { ArrowRight, MapPin, Building, Compass } from "lucide-react";
 import Navigation from "./Navigation";
 import HeroCarousel from "./HeroCarousel";
+
+// Minimal services for homepage preview
+const briefServices = [
+  {
+    title: "GIS Solutions",
+    description: "Advanced mapping and geospatial analysis to power smarter decisions.",
+    icon: MapPin,
+  },
+  {
+    title: "Aerial Photography",
+    description: "High-resolution aerial imagery and photogrammetric services for mapping, monitoring, and documentation.",
+    icon: Building,
+  },
+  {
+    title: "Environmental & Social Impact Assessment",
+    description: "Professional environmental and social impact assessments to ensure sustainable and compliant development.",
+    icon: Compass,
+  },
+];
 
 export default function HomePage() {
   return (
     <div className="bg-white text-gray-900">
       <Navigation />
-        <HeroCarousel />
+      <HeroCarousel />
 
       {/* Hero */}
       <section className="bg-gradient-to-r from-green-50 to-white">
@@ -19,9 +38,7 @@ export default function HomePage() {
               <span className="text-green-600">Technology</span>
             </h2>
             <p className="mt-6 text-lg text-gray-600">
-              Visioning Africa empowers communities and organizations by
-              delivering transformative solutions in GIS, software, and
-              data-driven decision-making.
+              Visioning Africa empowers communities and organizations by delivering transformative solutions in GIS, software, and data-driven decision-making.
             </p>
             <div className="mt-8 flex gap-4">
               <a
@@ -52,9 +69,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-6 py-16 text-center">
         <h3 className="text-2xl font-bold text-gray-900">About Us</h3>
         <p className="mt-4 max-w-2xl mx-auto text-gray-600">
-          We are shaping Africa’s future with innovation in GIS, surveying, and
-          planning. Our mission is to provide forward-thinking solutions that
-          harness technology for sustainable growth.
+          We are shaping Africa’s future with innovation in GIS, surveying, and planning. Our mission is to provide forward-thinking solutions that harness technology for sustainable growth.
         </p>
         <a
           href="/about"
@@ -64,35 +79,29 @@ export default function HomePage() {
         </a>
       </section>
 
-      {/* Services */}
-      <section id="services" className="bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <h3 className="text-2xl font-bold text-center text-gray-900">
-            Our Services
-          </h3>
-          <div className="mt-10 grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-              <Globe className="text-green-600 w-10 h-10 mb-4" />
-              <h4 className="text-lg font-semibold">GIS Solutions</h4>
-              <p className="mt-2 text-gray-600">
-                Advanced mapping and geospatial analysis to power smarter
-                decisions.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-              <BarChart className="text-green-600 w-10 h-10 mb-4" />
-              <h4 className="text-lg font-semibold">Aerial Photography</h4>
-              <p className="mt-2 text-gray-600">
-               High-resolution aerial imagery and photogrammetric services for mapping, monitoring, and documentation..
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-              <Code className="text-green-600 w-10 h-10 mb-4" />
-              <h4 className="text-lg font-semibold">Environmental & Social Impact Assessment</h4>
-              <p className="mt-2 text-gray-600">
-                Professional environmental and social impact assessments to ensure sustainable and compliant development.
-              </p>
-            </div>
+      {/* Services Preview */}
+      <section id="services" className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3 className="text-2xl font-bold text-center text-gray-900 mb-10">Our Services</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {briefServices.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <div key={index} className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition text-center">
+                  <Icon className="text-green-600 w-10 h-10 mx-auto mb-4" />
+                  <h4 className="text-lg font-semibold mb-2">{service.title}</h4>
+                  <p className="text-gray-600 text-sm">{service.description}</p>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-8 text-center">
+            <a
+              href="/services"
+              className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg shadow hover:bg-green-700 flex items-center gap-2 justify-center w-max mx-auto"
+            >
+              Learn More <ArrowRight size={18} />
+            </a>
           </div>
         </div>
       </section>
