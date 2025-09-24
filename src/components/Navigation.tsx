@@ -78,29 +78,34 @@ const Navigation: React.FC = () => {
               </Link>
 
               {openDesktopMenu === "services" && (
-                <div className="absolute left-0 mt-2 w-72 bg-white border rounded-lg shadow-lg">
+                <div className="absolute left-0 top-full w-72 bg-white border rounded-lg shadow-lg z-50">
                   {servicesItems.map((item) => (
                     <div
                       key={item.name}
-                      className="relative"
-                      onMouseEnter={() => setOpenDesktopMenu(item.name)}
-                      onMouseLeave={() => setOpenDesktopMenu("services")}
+                      className="relative group"
                     >
                       <Link
                         to={item.path}
-                        className="flex justify-between items-center px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        className="flex justify-between items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors duration-200"
+                        onMouseEnter={() => setOpenDesktopMenu(item.name)}
                       >
                         {item.name}
                         {item.children && <ChevronRight size={16} />}
                       </Link>
 
-                      {item.children && openDesktopMenu === item.name && (
-                        <div className="absolute top-0 left-full mt-0 w-72 bg-white border rounded-lg shadow-lg">
+                      {item.children && (
+                        <div 
+                          className={`absolute top-0 left-full w-72 bg-white border rounded-lg shadow-lg transition-all duration-200 ${
+                            openDesktopMenu === item.name ? 'opacity-100 visible' : 'opacity-0 invisible'
+                          }`}
+                          onMouseEnter={() => setOpenDesktopMenu(item.name)}
+                          onMouseLeave={() => setOpenDesktopMenu("services")}
+                        >
                           {item.children.map((sub) => (
                             <Link
                               key={sub.name}
                               to={sub.path}
-                              className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                              className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg"
                             >
                               {sub.name}
                             </Link>
