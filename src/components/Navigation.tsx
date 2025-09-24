@@ -8,6 +8,10 @@ interface ServiceItem {
   children?: { name: string; path: string }[];
 }
 
+interface ProjectItem {
+  name: string;
+  path: string;
+}
 const servicesItems: ServiceItem[] = [
   {
     name: "Consultancy",
@@ -31,6 +35,13 @@ const servicesItems: ServiceItem[] = [
   { name: "Physical Planning", path: "/services/physical-planning" },
 ];
 
+const projectItems: ProjectItem[] = [
+  { name: "Cadastral and Engineering Survey", path: "/projects/cadastral-engineering" },
+  { name: "Physical Planning", path: "/projects/physical-planning" },
+  { name: "GIS and Mapping", path: "/projects/gis-mapping" },
+  { name: "Environmental and Social Impact Assessment", path: "/projects/environmental-assessment" },
+  { name: "Other Projects", path: "/projects/other" },
+];
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDesktopMenu, setOpenDesktopMenu] = useState<string | null>(null);
@@ -78,29 +89,34 @@ const Navigation: React.FC = () => {
               </Link>
 
               {openDesktopMenu === "services" && (
-                <div className="absolute left-0 mt-2 w-72 bg-white border rounded-lg shadow-lg">
+                <div className="absolute left-0 top-full w-72 bg-white border rounded-lg shadow-lg z-50 -mt-1">
                   {servicesItems.map((item) => (
                     <div
                       key={item.name}
-                      className="relative"
-                      onMouseEnter={() => setOpenDesktopMenu(item.name)}
-                      onMouseLeave={() => setOpenDesktopMenu("services")}
+                      className="relative group"
                     >
                       <Link
                         to={item.path}
-                        className="flex justify-between items-center px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                        className="flex justify-between items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors duration-200"
+                        onMouseEnter={() => setOpenDesktopMenu(item.name)}
                       >
                         {item.name}
                         {item.children && <ChevronRight size={16} />}
                       </Link>
 
-                      {item.children && openDesktopMenu === item.name && (
-                        <div className="absolute top-0 left-full mt-0 w-72 bg-white border rounded-lg shadow-lg">
+                      {item.children && (
+                        <div 
+                          className={`absolute top-0 left-full w-72 bg-white border rounded-lg shadow-lg transition-all duration-200 -ml-1 ${
+                            openDesktopMenu === item.name ? 'opacity-100 visible' : 'opacity-0 invisible'
+                          }`}
+                          onMouseEnter={() => setOpenDesktopMenu(item.name)}
+                          onMouseLeave={() => setOpenDesktopMenu("services")}
+                        >
                           {item.children.map((sub) => (
                             <Link
                               key={sub.name}
                               to={sub.path}
-                              className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                              className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg"
                             >
                               {sub.name}
                             </Link>
@@ -113,9 +129,34 @@ const Navigation: React.FC = () => {
               )}
             </div>
 
-            <Link to="/clients" className="text-gray-700 hover:text-green-600 font-medium">
-              Projects
-            </Link>
+            {/* Projects Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setOpenDesktopMenu("projects")}
+              onMouseLeave={() => setOpenDesktopMenu(null)}
+            >
+              <Link
+                to="/clients"
+                className="flex items-center gap-1 text-gray-700 hover:text-green-600 font-medium"
+              >
+                Projects <ChevronDown size={18} />
+              </Link>
+
+              {openDesktopMenu === "projects" && (
+                <div className="absolute left-0 top-full w-80 bg-white border rounded-lg shadow-lg z-50 -mt-1">
+                  {projectItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <Link to="/contact" className="text-gray-700 hover:text-green-600 font-medium">
               Contact
             </Link>
@@ -178,9 +219,29 @@ const Navigation: React.FC = () => {
                 )}
               </div>
 
-              <Link to="/clients" className="block px-3 py-2 text-gray-700 hover:text-green-600">
-                Projects
-              </Link>
+              {/* Mobile Projects Dropdown */}
+              <div className="px-3">
+                <button
+                  onClick={() => toggleMobileSubMenu("projects")}
+                  className="flex justify-between items-center w-full py-2 font-medium text-gray-700 hover:text-green-600"
+                >
+                  Projects <ChevronDown size={16} />
+                </button>
+                {openMobileSubMenu === "projects" && (
+                  <div className="ml-3">
+                    {projectItems.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.path}
+                        className="block px-2 py-1 text-gray-600 hover:text-green-600"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <Link to="/contact" className="block px-3 py-2 text-gray-700 hover:text-green-600">
                 Contact
               </Link>
