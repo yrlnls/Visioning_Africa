@@ -81,17 +81,16 @@ export default function HomePage() {
             </div>
             <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
               <BarChart className="text-green-600 w-10 h-10 mb-4" />
-              <h4 className="text-lg font-semibold">Data Analytics</h4>
+              <h4 className="text-lg font-semibold">Aerial Photography</h4>
               <p className="mt-2 text-gray-600">
-                Unlock insights with tailored analytics for impactful
-                strategies.
+               High-resolution aerial imagery and photogrammetric services for mapping, monitoring, and documentation..
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
               <Code className="text-green-600 w-10 h-10 mb-4" />
-              <h4 className="text-lg font-semibold">Software Development</h4>
+              <h4 className="text-lg font-semibold">Environmental & Social Impact Assessment</h4>
               <p className="mt-2 text-gray-600">
-                Custom software solutions designed for Africa’s evolving needs.
+                Professional environmental and social impact assessments to ensure sustainable and compliant development.
               </p>
             </div>
           </div>
