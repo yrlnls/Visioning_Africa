@@ -12,6 +12,7 @@ interface ProjectItem {
   name: string;
   path: string;
 }
+
 const servicesItems: ServiceItem[] = [
   {
     name: "Consultancy",
@@ -42,9 +43,11 @@ const projectItems: ProjectItem[] = [
   { name: "Environmental and Social Impact Assessment", path: "/projects/environmental-assessment" },
   { name: "Other Projects", path: "/projects/other" },
 ];
+
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDesktopMenu, setOpenDesktopMenu] = useState<string | null>(null);
+  const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [openMobileSubMenu, setOpenMobileSubMenu] = useState<string | null>(null);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -79,7 +82,10 @@ const Navigation: React.FC = () => {
             <div
               className="relative"
               onMouseEnter={() => setOpenDesktopMenu("services")}
-              onMouseLeave={() => setOpenDesktopMenu(null)}
+              onMouseLeave={() => {
+                setOpenDesktopMenu(null);
+                setOpenSubMenu(null);
+              }}
             >
               <Link
                 to="/services"
@@ -91,26 +97,26 @@ const Navigation: React.FC = () => {
               {openDesktopMenu === "services" && (
                 <div className="absolute left-0 top-full w-72 bg-white border rounded-lg shadow-lg z-50 -mt-1">
                   {servicesItems.map((item) => (
-                    <div
-                      key={item.name}
-                      className="relative group"
-                    >
+                    <div key={item.name} className="relative group">
                       <Link
                         to={item.path}
                         className="flex justify-between items-center px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors duration-200"
-                        onMouseEnter={() => setOpenDesktopMenu(item.name)}
+                        onMouseEnter={() => setOpenSubMenu(item.name)}
+                        onMouseLeave={() => setOpenSubMenu(null)}
                       >
                         {item.name}
                         {item.children && <ChevronRight size={16} />}
                       </Link>
 
                       {item.children && (
-                        <div 
+                        <div
                           className={`absolute top-0 left-full w-72 bg-white border rounded-lg shadow-lg transition-all duration-200 -ml-1 ${
-                            openDesktopMenu === item.name ? 'opacity-100 visible' : 'opacity-0 invisible'
+                            openSubMenu === item.name
+                              ? "opacity-100 visible"
+                              : "opacity-0 invisible"
                           }`}
-                          onMouseEnter={() => setOpenDesktopMenu(item.name)}
-                          onMouseLeave={() => setOpenDesktopMenu("services")}
+                          onMouseEnter={() => setOpenSubMenu(item.name)}
+                          onMouseLeave={() => setOpenSubMenu(null)}
                         >
                           {item.children.map((sub) => (
                             <Link
