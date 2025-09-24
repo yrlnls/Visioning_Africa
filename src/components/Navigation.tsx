@@ -78,7 +78,7 @@ const Navigation: React.FC = () => {
               </Link>
 
               {openDesktopMenu === "services" && (
-                <div className="absolute left-0 top-full w-72 bg-white border rounded-lg shadow-lg z-50">
+                <div className="absolute left-0 top-full w-72 bg-white border rounded-lg shadow-lg z-50 -mt-1">
                   {servicesItems.map((item) => (
                     <div
                       key={item.name}
@@ -95,7 +95,7 @@ const Navigation: React.FC = () => {
 
                       {item.children && (
                         <div 
-                          className={`absolute top-0 left-full w-72 bg-white border rounded-lg shadow-lg transition-all duration-200 ${
+                          className={`absolute top-0 left-full w-72 bg-white border rounded-lg shadow-lg transition-all duration-200 -ml-1 ${
                             openDesktopMenu === item.name ? 'opacity-100 visible' : 'opacity-0 invisible'
                           }`}
                           onMouseEnter={() => setOpenDesktopMenu(item.name)}
