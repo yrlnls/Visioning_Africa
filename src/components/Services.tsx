@@ -1,49 +1,49 @@
 import React from "react";
-import { MapPin, Building, Compass, Camera, Users, Leaf, CheckCircle2 } from "lucide-react";
+import { MapPin, Building, Compass, Camera, Users, Leaf } from "lucide-react";
 
 const Services: React.FC = () => {
   const services = [
     {
-      title: "Cadastral & Engineering Survey",
+      title: "Positioning",
       description:
-        "Precise boundary surveys, topographic mapping, and engineering measurements using state-of-the-art equipment and methodologies.",
+        "Over a period of time, we have been offering distinctive services in cadastral and engineering surveys while employing current technologies in delivering our services.",
       icon: MapPin,
-      features: ["Boundary Surveys", "Topographic Mapping", "Construction Staking", "As-Built Surveys"],
+      color: "text-gray-900 bg-gray-100",
     },
     {
       title: "Physical Planning",
       description:
-        "Comprehensive urban and regional planning services for sustainable development and efficient land use management.",
+        "Physical planning provides guidelines by which urban and rural development initiatives must adhere to for sustainable future urbanization. Geodev has been actively involved in the formulation of these guidelines in quite a good number of counties in Kenya.",
       icon: Building,
-      features: ["Master Planning", "Zoning Studies", "Development Control", "Urban Design"],
+      color: "text-red-500 bg-red-100",
     },
     {
-      title: "GIS & Mapping",
+      title: "GIS and Mapping",
       description:
-        "Advanced Geographic Information Systems solutions for spatial analysis, data management, and decision support.",
+        "Geospatial technology provides a tool for managing spatial data. Our experienced GIS team provides intensive support to other departments in mapping and organizing spatial data.",
       icon: Compass,
-      features: ["Spatial Analysis", "Database Design", "Web Mapping", "Custom Applications"],
+      color: "text-blue-500 bg-blue-100",
     },
     {
       title: "Aerial Photography",
       description:
-        "High-resolution aerial imagery and photogrammetric services for mapping, monitoring, and documentation.",
+        "We use advanced aerial imaging systems to capture aerial images within the area of interest. Our imagery team ensures images delivered to clients are of good quality. In addition, we offer satellite images to our clients.",
       icon: Camera,
-      features: ["Drone Surveys", "Orthophoto Maps", "Volume Calculations", "Progress Monitoring"],
+      color: "text-cyan-500 bg-cyan-100",
     },
     {
-      title: "Resettlement Action Plan",
+      title: "Resettlement Action Plan (RAP)",
       description:
-        "Comprehensive planning and implementation support for community resettlement projects with social safeguards.",
+        "Projects, as well as natural causes, impact the settlement of citizens and hence the need for RAP. We, Geodev, prepare RAP documents to guide in the acquisition, compensation, and resettlement of affected people.",
       icon: Users,
-      features: ["Social Surveys", "Compensation Planning", "Livelihood Restoration", "Monitoring & Evaluation"],
+      color: "text-yellow-500 bg-yellow-100",
     },
     {
-      title: "Environmental & Social Impact Assessment",
+      title: "Environmental and Social Impact Assessment and Audit",
       description:
-        "Professional environmental and social impact assessments to ensure sustainable and compliant development.",
+        "Our Environment team has undertaken ESIA and EIA projects that have been used to foresee the economic aspect of projects and the project's impact on the people and the environment.",
       icon: Leaf,
-      features: ["Environmental Audits", "Social Impact Studies", "Compliance Monitoring", "Mitigation Planning"],
+      color: "text-green-500 bg-green-100",
     },
   ];
 
@@ -54,8 +54,7 @@ const Services: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We deliver comprehensive surveying, mapping, and planning solutions designed to meet Africa’s unique
-            challenges with precision, professionalism, and innovation.
+            We deliver comprehensive surveying, mapping, and planning solutions designed to meet Africa’s unique challenges with precision, professionalism, and innovation.
           </p>
         </div>
 
@@ -64,33 +63,17 @@ const Services: React.FC = () => {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div
-                key={index}
-                className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-green-500"
-              >
+              <div key={index} className="flex items-start gap-4">
                 {/* Icon */}
-                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-green-100 mb-6">
-                  <Icon className="text-green-600 w-7 h-7" />
+                <div className={`w-10 h-10 flex items-center justify-center rounded-full ${service.color}`}>
+                  <Icon className="w-6 h-6" />
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
-
-                {/* Features */}
-                <ul className="space-y-3">
-                  {service.features.map((feature, fIndex) => (
-                    <li key={fIndex} className="flex items-center gap-2 text-sm text-gray-700">
-                      <CheckCircle2 className="text-green-500 w-4 h-4" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <button className="mt-8 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors duration-300">
-                  Learn More
-                </button>
+                {/* Text */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{service.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
+                </div>
               </div>
             );
           })}
