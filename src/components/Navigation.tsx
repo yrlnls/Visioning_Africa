@@ -2,33 +2,43 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronRight, Menu, X, MapPin } from "lucide-react";
 
+interface ServiceItem {
+  name: string;
+  path: string;
+  children?: { name: string; path: string }[];
+}
+
+const servicesItems: ServiceItem[] = [
+  {
+    name: "Consultancy",
+    path: "/services/consultancy",
+    children: [
+      { name: "Engineering Consultancy", path: "/services/consultancy/engineering" },
+      { name: "Research and Policy Development", path: "/services/consultancy/research" },
+      { name: "Transaction Advisory Services", path: "/services/consultancy/advisory" },
+    ],
+  },
+  { name: "Environmental and Social Impact Assessment", path: "/services/environmental" },
+  {
+    name: "Positioning",
+    path: "/services/positioning",
+    children: [
+      { name: "Engineering Survey", path: "/services/positioning/engineering-survey" },
+      { name: "Land Survey", path: "/services/positioning/land-survey" },
+    ],
+  },
+  { name: "GIS & Mapping", path: "/services/gis-mapping" },
+  { name: "Physical Planning", path: "/services/physical-planning" },
+];
+
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openDesktopMenu, setOpenDesktopMenu] = useState<string | null>(null);
+  const [openMobileSubMenu, setOpenMobileSubMenu] = useState<string | null>(null);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const servicesItems = [
-    {
-      name: "Consultancy",
-      path: "/services/consultancy",
-      children: [
-        { name: "Engineering Consultancy", path: "/services/consultancy/engineering" },
-        { name: "Research and Policy Development", path: "/services/consultancy/research" },
-        { name: "Transaction Advisory Services", path: "/services/consultancy/advisory" },
-      ],
-    },
-    { name: "Environmental and Social Impact Assessment", path: "/services/environmental" },
-    {
-      name: "Positioning",
-      path: "/services/positioning",
-      children: [
-        { name: "Engineering Survey", path: "/services/positioning/engineering-survey" },
-        { name: "Land Survey", path: "/services/positioning/land-survey" },
-      ],
-    },
-    { name: "GIS & Mapping", path: "/services/gis-mapping" },
-    { name: "Physical Planning", path: "/services/physical-planning" },
-  ];
+  const toggleMobileSubMenu = (name: string) =>
+    setOpenMobileSubMenu(openMobileSubMenu === name ? null : name);
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
@@ -55,7 +65,11 @@ const Navigation: React.FC = () => {
             </Link>
 
             {/* Services Dropdown */}
-            <div className="relative group">
+            <div
+              className="relative"
+              onMouseEnter={() => setOpenDesktopMenu("services")}
+              onMouseLeave={() => setOpenDesktopMenu(null)}
+            >
               <Link
                 to="/services"
                 className="flex items-center gap-1 text-gray-700 hover:text-green-600 font-medium"
@@ -63,35 +77,40 @@ const Navigation: React.FC = () => {
                 Services <ChevronDown size={18} />
               </Link>
 
-              {/* Dropdown */}
-              <div className="absolute left-0 mt-2 w-72 bg-white border rounded-lg shadow-lg hidden group-hover:block">
-                {servicesItems.map((item) => (
-                  <div key={item.name} className="relative group/item">
-                    <Link
-                      to={item.path}
-                      className="flex justify-between items-center px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+              {openDesktopMenu === "services" && (
+                <div className="absolute left-0 mt-2 w-72 bg-white border rounded-lg shadow-lg">
+                  {servicesItems.map((item) => (
+                    <div
+                      key={item.name}
+                      className="relative"
+                      onMouseEnter={() => setOpenDesktopMenu(item.name)}
+                      onMouseLeave={() => setOpenDesktopMenu("services")}
                     >
-                      {item.name}
-                      {item.children && <ChevronRight size={16} />}
-                    </Link>
+                      <Link
+                        to={item.path}
+                        className="flex justify-between items-center px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                      >
+                        {item.name}
+                        {item.children && <ChevronRight size={16} />}
+                      </Link>
 
-                    {/* Sub-dropdown if children exist */}
-                    {item.children && (
-                      <div className="absolute top-0 left-full mt-0 w-72 bg-white border rounded-lg shadow-lg hidden group-hover/item:block">
-                        {item.children.map((sub) => (
-                          <Link
-                            key={sub.name}
-                            to={sub.path}
-                            className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
-                          >
-                            {sub.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+                      {item.children && openDesktopMenu === item.name && (
+                        <div className="absolute top-0 left-full mt-0 w-72 bg-white border rounded-lg shadow-lg">
+                          {item.children.map((sub) => (
+                            <Link
+                              key={sub.name}
+                              to={sub.path}
+                              className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <Link to="/clients" className="text-gray-700 hover:text-green-600 font-medium">
@@ -124,35 +143,39 @@ const Navigation: React.FC = () => {
 
               {/* Mobile Services Dropdown */}
               <div className="px-3">
-                <Link
-                  to="/services"
-                  className="block py-2 font-medium text-gray-700 hover:text-green-600"
+                <button
+                  onClick={() => toggleMobileSubMenu("services")}
+                  className="flex justify-between items-center w-full py-2 font-medium text-gray-700 hover:text-green-600"
                 >
-                  Services
-                </Link>
-                {servicesItems.map((item) => (
-                  <div key={item.name} className="ml-3">
-                    <Link
-                      to={item.path}
-                      className="block px-2 py-1 text-gray-600 hover:text-green-600"
-                    >
-                      {item.name}
-                    </Link>
-                    {item.children && (
-                      <div className="ml-4">
-                        {item.children.map((sub) => (
-                          <Link
-                            key={sub.name}
-                            to={sub.path}
-                            className="block px-2 py-1 text-gray-500 hover:text-green-600"
-                          >
-                            {sub.name}
-                          </Link>
-                        ))}
+                  Services <ChevronDown size={16} />
+                </button>
+                {openMobileSubMenu === "services" && (
+                  <div className="ml-3">
+                    {servicesItems.map((item) => (
+                      <div key={item.name}>
+                        <Link
+                          to={item.path}
+                          className="block px-2 py-1 text-gray-600 hover:text-green-600"
+                        >
+                          {item.name}
+                        </Link>
+                        {item.children && (
+                          <div className="ml-4">
+                            {item.children.map((sub) => (
+                              <Link
+                                key={sub.name}
+                                to={sub.path}
+                                className="block px-2 py-1 text-gray-500 hover:text-green-600"
+                              >
+                                {sub.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                    )}
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
 
               <Link to="/clients" className="block px-3 py-2 text-gray-700 hover:text-green-600">
