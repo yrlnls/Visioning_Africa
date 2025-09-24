@@ -57,7 +57,7 @@ export default function HomePage() {
           </div>
           <div className="hidden md:block">
             <img
-              src="https://source.unsplash.com/600x400/?africa,technology"
+              src="/5.jpg"
               alt="Visioning Africa"
               className="rounded-2xl shadow-lg"
             />

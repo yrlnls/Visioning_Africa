@@ -11,7 +11,7 @@ const HeroCarousel: React.FC = () => {
       description: 'Precise land surveying and cadastral mapping services using cutting-edge technology for accurate property boundaries and engineering projects.',
       icon: <MapPin className="text-green-600" size={48} />,
       bgGradient: 'from-green-600 to-green-800',
-      image: 'https://images.pexels.com/photos/3825454/pexels-photo-3825454.jpeg?auto=compress&cs=tinysrgb&w=1600'
+      image: '/1.jpg'
     },
     {
       title: 'GIS & Mapping',
@@ -19,7 +19,7 @@ const HeroCarousel: React.FC = () => {
       description: 'Advanced Geographic Information Systems, remote sensing technologies, and detailed cartographic solutions for comprehensive spatial analysis.',
       icon: <Compass className="text-green-600" size={48} />,
       bgGradient: 'from-green-600 to-green-800',
-      image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=1600'
+      image: '/2.jpg'
     },
     {
       title: 'Physical Planning',
@@ -27,7 +27,7 @@ const HeroCarousel: React.FC = () => {
       description: 'Comprehensive urban and regional planning services to create sustainable, well-organized communities and development projects.',
       icon: <Building className="text-purple-600" size={48} />,
       bgGradient: 'from-purple-600 to-purple-800',
-      image: 'https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=1600'
+      image: '/6.jpg'
     },
     {
       title: 'Environmental Consultancy',
@@ -35,7 +35,7 @@ const HeroCarousel: React.FC = () => {
       description: 'Expert environmental and social impact assessments to ensure sustainable development and regulatory compliance.',
       icon: <Leaf className="text-emerald-600" size={48} />,
       bgGradient: 'from-emerald-600 to-emerald-800',
-      image: 'https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=1600'
+      image: '/4.jpg'
     }
   ];
 
