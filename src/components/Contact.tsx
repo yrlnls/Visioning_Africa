@@ -165,6 +165,14 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-800 mb-3">Visit Our Office</h3>
+                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.171375314854!2d36.79520546224228!3d-1.2990720290172846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10c25040a807%3A0x6d2c4456e6983c51!2sUpperhill%20Gardens%20Apartments!5e0!3m2!1sen!2ske!4v1759631683801!5m2!1sen!2ske" 
+                    width="600" 
+                    height="450" 
+                    style={{border:0}}
+                    allowFullScreen
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade">
+                   </iframe>
                   <p className="text-gray-600 leading-relaxed">
                     Upper Hill Gardens, Block A Suite A37<br />
                     3rd Ngong Avenue<br />
@@ -183,8 +191,8 @@ const Contact: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-bold text-gray-800 mb-3">Call Us</h3>
                   <div className="space-y-2 text-gray-600">
-                    <p>+254 700 123 456</p>
-                    <p>+254 711 234 567</p>
+                    <p>+254 746 061 690</p>
+                    <p>+254 723 952 653</p>
                   </div>
                 </div>
               </div>
@@ -237,7 +245,7 @@ const Contact: React.FC = () => {
               </p>
               <div className="flex items-center gap-2 text-lg font-semibold">
                 <Phone size={20} />
-                <span>+254 700 SURVEY (700 787 839)</span>
+                <span>+254 746 061 690 / +254 723 952 653</span>
               </div>
             </div>
           </div>

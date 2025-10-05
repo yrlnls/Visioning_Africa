@@ -8,11 +8,11 @@ const Header: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 mb-2 sm:mb-0">
           <div className="flex items-center gap-2">
             <Phone size={14} />
-            <span>+254 700 123 456</span>
+            <span>+254 746 061 690</span>
           </div>
           <div className="flex items-center gap-2">
             <Phone size={14} />
-            <span>+254 711 234 567</span>
+            <span>+254 723 952 653</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
